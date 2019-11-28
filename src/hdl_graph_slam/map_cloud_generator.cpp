@@ -45,7 +45,11 @@ pcl::PointCloud<MapCloudGenerator::PointT>::Ptr MapCloudGenerator::generate(cons
   filtered->height = 1;
   filtered->is_dense = false;
 
-  return filtered;
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++
+  // instead of outputting the voxelized map, output the raw cloud to keep intesity channel
+  // return filtered;
+  return cloud; 
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++
 }
 
 }
