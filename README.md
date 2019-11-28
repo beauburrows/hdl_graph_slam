@@ -1,3 +1,14 @@
+# Notes on this fork:
+- Created a new launch file for the Ouster OS1-64 sensor
+- Modified the final map point cloud function so that intensity doesn't get lost in voxelization (which gets skipped)
+- Created a new bag_player script to play rosbag files back at non-realtime speeds
+
+To link to cloned github and build:
+- inside catkin_ws/src do:
+  git clone https://github.com/beauburrows/hdl_graph_slam.git
+  cd ..
+  catkin_make
+
 # hdl_graph_slam
 ***hdl_graph_slam*** is an open source ROS package for real-time 6DOF SLAM using a 3D LIDAR. It is based on 3D Graph SLAM with NDT scan matching-based odometry estimation and loop detection. It also supports several graph constraints, such as GPS, IMU acceleration (gravity vector), IMU orientation (magnetic sensor), and floor plane (detected in a point cloud). We have tested this package with Velodyne (HDL32e, VLP16) and RoboSense (16 channels) sensors in indoor and outdoor environments. 
 
