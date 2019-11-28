@@ -10,6 +10,30 @@ cd ..
 catkin_make
 ```
 
+To run with a bag file recorder from ouster_ros that has the time stamp modified (https://github.com/ouster-lidar/ouster_example/issues/74):
+```bash
+rosparam set use_sim_time true
+roslaunch hdl_graph_slam hdl_graph_slam_400-os1.launch
+```
+then start RViz:
+```bash
+roscd hdl_graph_slam/rviz
+rviz -d hdl_graph_slam.rviz
+```
+Finally, play back bag file with non real-time player:
+```bash
+rosrun hdl_graph_slam bag_player-nonRT.py /PATH/TO/BAG/BAGNAME.bag
+```
+To record the final point cloud, buffer size must be increased:
+```bash
+rosbag record -O BAGNAME -b 1024 /hdl_graph_slam/map_points
+```
+Finally, to convert the bag file to a PCD, use bag_to_pcd:
+```bash
+rosrun pcl_ros bag_to_pcd BAGNAME.bag /hdl_graph_slam/map_points ./
+```
+
+
 # hdl_graph_slam
 ***hdl_graph_slam*** is an open source ROS package for real-time 6DOF SLAM using a 3D LIDAR. It is based on 3D Graph SLAM with NDT scan matching-based odometry estimation and loop detection. It also supports several graph constraints, such as GPS, IMU acceleration (gravity vector), IMU orientation (magnetic sensor), and floor plane (detected in a point cloud). We have tested this package with Velodyne (HDL32e, VLP16) and RoboSense (16 channels) sensors in indoor and outdoor environments. 
 
